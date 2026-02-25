@@ -40,7 +40,7 @@ const NavMenu = () => (
       </li>
 
       <li aria-haspopup="true" className="h-link">
-        <a href="/blog" className="h-scroll-link">
+        <a href="/#blog" className="h-scroll-link">
           Blog
         </a>
       </li>

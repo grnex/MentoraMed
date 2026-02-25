@@ -10,6 +10,7 @@ import BenefitsSection from "../components/benefits/BenefitsSection.jsx";
 import FAQNR1Section from "../components/faqnr1/FAQNR1Section.jsx";
 import ContactSection from "../components/contact/ContactSection.jsx";
 import FooterSection from "../components/footer/FooterSection.jsx";
+import BlogLandingSection from "../components/blog/BlogLandingSection.jsx";
 
 function LandingPage() {
   return (
@@ -23,6 +24,7 @@ function LandingPage() {
       <FAQSection />
       <BenefitsSection />
       <FAQNR1Section />
+      <BlogLandingSection />
       <ContactSection />
     </div>
   );
