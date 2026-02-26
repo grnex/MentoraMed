@@ -7,11 +7,11 @@ import LandingPage from "./pages/LandingPage.jsx";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy.jsx";
 import TermsOfUse from "./pages/legal/TermsOfUse.jsx";
 import ServicesPage from "./pages/ServicesPage.jsx";
-import BlogPage from "./pages/BlogPage.jsx";
-import BlogPostNR1 from "./pages/BlogPostNR1.jsx";
-import BlogPostPausa from "./pages/BlogPostPausa.jsx";
-import BlogPostNR1_2024 from "./pages/BlogPostNR1_2024.jsx";
-import BlogPostRiscos from "./pages/BlogPostRiscos.jsx";
+import BlogPage from "./pages/BlogPosts/BlogPage.jsx";
+import BlogPostNR1 from "./pages/BlogPosts/BlogPostNR1.jsx";
+import BlogPostPausa from "./pages/BlogPosts/BlogPostPausa.jsx";
+import BlogPostNR1_2024 from "./pages/BlogPosts/BlogPostNR1_2024.jsx";
+import BlogPostRiscos from "./pages/BlogPosts/BlogPostRiscos.jsx";
 
 function App() {
   return (
