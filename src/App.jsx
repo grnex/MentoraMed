@@ -7,6 +7,11 @@ import LandingPage from "./pages/LandingPage.jsx";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy.jsx";
 import TermsOfUse from "./pages/legal/TermsOfUse.jsx";
 import ServicesPage from "./pages/ServicesPage.jsx";
+import BlogPage from "./pages/BlogPage.jsx";
+import BlogPostNR1 from "./pages/BlogPostNR1.jsx";
+import BlogPostPausa from "./pages/BlogPostPausa.jsx";
+import BlogPostNR1_2024 from "./pages/BlogPostNR1_2024.jsx";
+import BlogPostRiscos from "./pages/BlogPostRiscos.jsx";
 
 function App() {
   return (
@@ -18,6 +23,11 @@ function App() {
         <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
         <Route path="/termos-de-uso" element={<TermsOfUse />} />
         <Route path="/servicos" element={<ServicesPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/nova-nr1" element={<BlogPostNR1 />} />
+        <Route path="/blog/pausa" element={<BlogPostPausa />} />
+        <Route path="/blog/nr1-2024" element={<BlogPostNR1_2024 />} />
+        <Route path="/blog/riscos-psicossociais" element={<BlogPostRiscos />} />
       </Routes>
 
       <FooterSection />

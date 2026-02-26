@@ -1,5 +1,3 @@
-import SocialLinks from "./SocialLinks";
-
 const NavMenu = () => (
   <nav className="wsmenu clearfix">
     <ul className="wsmenu-list nav-blue">

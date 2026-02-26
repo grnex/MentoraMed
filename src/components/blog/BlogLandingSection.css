@@ -3,6 +3,8 @@
 .blog-landing-section {
     background-color: #1a2e2e;
     color: #ffffff;
+    position: relative;
+    overflow: hidden;
 }
 
 .blog-landing-title {
@@ -43,6 +45,75 @@
     background-color: #0A5046;
     border-color: #0A5046;
     color: #ffffff;
+}
+
+/* CAROUSEL ENGINE */
+.blog-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+    /* Space for buttons */
+}
+
+.blog-carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+.blog-carousel-item {
+    flex: 0 0 100%;
+    /* Mobile: 1 card */
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .blog-carousel-item {
+        flex: 0 0 50%;
+        /* Tablet: 2 cards */
+    }
+}
+
+@media (min-width: 992px) {
+    .blog-carousel-item {
+        flex: 0 0 33.333%;
+        /* Desktop: 3 cards */
+    }
+}
+
+/* NAVIGATION BUTTONS */
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(10, 80, 70, 0.8);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+    font-size: 20px;
+}
+
+.carousel-nav-btn:hover {
+    background-color: #7AB49E;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav-btn.prev {
+    left: 0;
+}
+
+.carousel-nav-btn.next {
+    right: 0;
 }
 
 /* Post Cards */
@@ -99,22 +170,22 @@
 .blog-l-category {
     background-color: #f2f7f8;
     color: #0A5046;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: 6px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .blog-l-date {
-    font-size: 13px;
+    font-size: 12px;
     color: #777;
     font-weight: 500;
 }
 
 .blog-l-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: #0A5046;
     margin-bottom: 15px;
@@ -122,7 +193,7 @@
 }
 
 .blog-l-desc {
-    font-size: 15px;
+    font-size: 14px;
     color: #555;
     line-height: 1.5;
     margin-bottom: 25px;
@@ -140,14 +211,15 @@
 .blog-l-btn {
     background-color: #0A5046;
     color: #ffffff;
-    padding: 10px 24px;
-    border-radius: 8px;
+    padding: 8px 20px;
+    border-radius: 6px;
     text-align: center;
     font-weight: 600;
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
     border: 1px solid #0A5046;
+    font-size: 14px;
 }
 
 .blog-l-btn:hover {

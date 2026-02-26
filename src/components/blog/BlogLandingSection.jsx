@@ -8,18 +8,18 @@ const blogPosts = [
         title: "Implementação da NR-1: O que mudou em 2024?",
         description: "Entenda as novas exigências da norma e como sua empresa pode ser adequar rapidamente às mudanças mais recentes mantendo o bem-estar da equipe.",
         date: "15 Fev 2024",
-        link: "/blog", // you can route to specific post later
+        link: "/blog/nr1-2024",
         thumbnail: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=600&auto=format&fit=crop",
         type: "image"
     },
     {
         id: 2,
         category: "Vídeo",
-        title: "Como identificar o Burnout na equipe?",
-        description: "Assista nosso vídeo exclusivo detalhando os principais sintomas de esgotamento, como líderes podem intervir antecipadamente e promover a saúde ocupacional.",
-        date: "10 Mar 2024",
-        link: "https://www.youtube.com/watch?v=Eqjqwrm1mfA", // Exemplo, pode ser trocado
-        videoId: "Eqjqwrm1mfA",
+        title: "Entender a NR-1",
+        description: "Assita o video para entender a NR-1 não e apenas estar em comformidade com a lei, mas também garantir a segurança e saúde dos trabalhadores.",
+        date: "10 Agosto 2025",
+        link: "https://www.youtube.com/shorts/9X5i9tw8N8I",
+        videoId: "9X5i9tw8N8I",
         type: "video"
     },
     {
@@ -28,8 +28,18 @@ const blogPosts = [
         title: "Gestão de Riscos Psicossociais no Trabalho",
         description: "Saiba como mapear, identificar e mitigar efetivamente os principais riscos à saúde mental dos seus colaboradores e criar uma cultura de trabalho muito mais saudável.",
         date: "05 Abr 2024",
-        link: "/blog",
+        link: "/blog/riscos-psicossociais",
         thumbnail: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=600&auto=format&fit=crop",
+        type: "image"
+    },
+    {
+        id: 4,
+        category: "NR-1",
+        title: "NR-1 e Saúde Mental: O que Muda em 2025?",
+        description: "Entenda a obrigatoriedade dos riscos psicossociais no PGR e como preparar sua empresa para a nova atualização da NR-1.",
+        date: "25 Fev 2026",
+        link: "/blog/nova-nr1",
+        thumbnail: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=600&auto=format&fit=crop",
         type: "image"
     }
 ];
@@ -38,14 +48,46 @@ const categories = ["Todos", "NR-1", "Saúde Ocupacional", "Vídeo"];
 
 const BlogLandingSection = () => {
     const [activeFilter, setActiveFilter] = useState("Todos");
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [itemsToShow, setItemsToShow] = useState(
+        window.innerWidth > 991 ? 3 : window.innerWidth > 767 ? 2 : 1
+    );
 
     const filteredPosts = activeFilter === "Todos"
         ? blogPosts
         : blogPosts.filter(post => post.category === activeFilter);
 
+    // Update itemsToShow on resize
+    React.useEffect(() => {
+        const handleResize = () => {
+            setItemsToShow(window.innerWidth > 991 ? 3 : window.innerWidth > 767 ? 2 : 1);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const nextSlide = () => {
+        if (currentIndex < filteredPosts.length - itemsToShow) {
+            setCurrentIndex(currentIndex + 1);
+        } else {
+            setCurrentIndex(0); // Loop back
+        }
+    };
+
+    const prevSlide = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
+        } else {
+            setCurrentIndex(Math.max(0, filteredPosts.length - itemsToShow)); // Loop to end
+        }
+    };
+
+    // Calculate how many cards to show or how to translate
+    // We'll use a CSS-based approach for the track movement
+
     return (
         <section id="blog" className="blog-landing-section py-100">
-            <div className="container">
+            <div className="container overflow-hidden">
 
                 {/* Header da Seção */}
                 <div className="row justify-content-center">
@@ -67,7 +109,10 @@ const BlogLandingSection = () => {
                                 <button
                                     key={index}
                                     className={`blog-filter-btn ${activeFilter === cat ? 'active' : ''}`}
-                                    onClick={() => setActiveFilter(cat)}
+                                    onClick={() => {
+                                        setActiveFilter(cat);
+                                        setCurrentIndex(0); // Reset index on filter change
+                                    }}
                                 >
                                     {cat}
                                 </button>
@@ -76,44 +121,58 @@ const BlogLandingSection = () => {
                     </div>
                 </div>
 
-                {/* Grid de Posts */}
-                <div className="row">
-                    {filteredPosts.map(post => (
-                        <div key={post.id} className="col-md-6 col-lg-4 mb-40">
-                            <div className="blog-l-card">
+                {/* Carousel Container */}
+                <div className="blog-carousel-wrapper">
+                    {/* Botões de Navegação */}
+                    <button className="carousel-nav-btn prev" onClick={prevSlide}>
+                        <span>&#10094;</span>
+                    </button>
+                    <button className="carousel-nav-btn next" onClick={nextSlide}>
+                        <span>&#10095;</span>
+                    </button>
 
-                                {/* Imagem / Video */}
-                                <div className="blog-l-thumb">
-                                    {post.type === "video" ? (
-                                        <iframe
-                                            src={`https://www.youtube.com/embed/${post.videoId}?rel=0`}
-                                            title={post.title}
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        ></iframe>
-                                    ) : (
-                                        <img src={post.thumbnail} alt={post.title} />
-                                    )}
-                                </div>
+                    <div className="blog-carousel-track" style={{
+                        transform: `translateX(-${currentIndex * (100 / itemsToShow)}%)`
+                    }}>
+                        {filteredPosts.map(post => (
+                            <div key={post.id} className="blog-carousel-item">
+                                <div className="blog-l-card">
 
-                                {/* Conteúdo do Card */}
-                                <div className="blog-l-content">
-                                    <div className="blog-l-meta">
-                                        <span className="blog-l-category">{post.category}</span>
-                                        <span className="blog-l-date">{post.date}</span>
+                                    {/* Imagem / Video */}
+                                    <div className="blog-l-thumb">
+                                        {post.type === "video" ? (
+                                            <iframe
+                                                src={`https://www.youtube.com/embed/${post.videoId}?rel=0`}
+                                                title={post.title}
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                            ></iframe>
+                                        ) : (
+                                            <img src={post.thumbnail} alt={post.title} />
+                                        )}
                                     </div>
 
-                                    <h5 className="blog-l-title">{post.title}</h5>
-                                    <p className="blog-l-desc">{post.description}</p>
+                                    {/* Conteúdo do Card */}
+                                    <div className="blog-l-content">
+                                        <div className="blog-l-meta">
+                                            <span className="blog-l-category">{post.category}</span>
+                                            <span className="blog-l-date">{post.date}</span>
+                                        </div>
 
-                                    <div className="blog-l-btn-wrapper">
-                                        <a href={post.link} className="blog-l-btn">Ler mais</a>
+                                        <h5 className="blog-l-title">{post.title}</h5>
+                                        <p className="blog-l-desc">{post.description}</p>
+
+                                        <div className="blog-l-btn-wrapper">
+                                            <a href={post.link} className="blog-l-btn">
+                                                {post.type === "video" ? "Assistir" : "Ler mais"}
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
 
             </div>
