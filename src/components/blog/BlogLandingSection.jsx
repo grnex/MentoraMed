@@ -1,5 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './BlogLandingSection.css';
+
+import BlogPostNR1 from '../../pages/BlogPosts/BlogPostNR1.jsx';
+import BlogPostNR1_2024 from '../../pages/BlogPosts/BlogPostNR1_2024.jsx';
+import BlogPostRiscos from '../../pages/BlogPosts/BlogPostRiscos.jsx';
+import BlogPostPausa from '../../pages/BlogPosts/BlogPostPausa.jsx';
+
+/* ── helper: excerpt ~120 chars ── */
+const excerpt = (text, max = 120) =>
+    text.length <= max ? text : text.slice(0, max).trimEnd() + '...';
+
+/* ── mapa link → componente de conteúdo ── */
+const postContentMap = {
+    '/blog/nr1-2024': <BlogPostNR1_2024 />,
+    '/blog/nova-nr1': <BlogPostNR1 />,
+    '/blog/riscos-psicossociais': <BlogPostRiscos />,
+    '/blog/pausa': <BlogPostPausa />,
+};
 
 const blogPosts = [
     {
@@ -52,6 +69,7 @@ const BlogLandingSection = () => {
     const [itemsToShow, setItemsToShow] = useState(
         window.innerWidth > 991 ? 3 : window.innerWidth > 767 ? 2 : 1
     );
+    const [activePost, setActivePost] = useState(null);
 
     const filteredPosts = activeFilter === "Todos"
         ? blogPosts
@@ -82,101 +100,218 @@ const BlogLandingSection = () => {
         }
     };
 
-    // Calculate how many cards to show or how to translate
-    // We'll use a CSS-based approach for the track movement
+    /* ── Modal: fechar ── */
+    const closeModal = useCallback(() => setActivePost(null), []);
+
+    /* Escape key */
+    useEffect(() => {
+        if (!activePost) return;
+        const onKey = (e) => { if (e.key === 'Escape') closeModal(); };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [activePost, closeModal]);
+
+    /* Bloquear scroll do body quando modal aberto */
+    useEffect(() => {
+        if (activePost) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [activePost]);
+
+    /* ── Abrir post no modal ── */
+    const handleReadMore = (post) => {
+        // Vídeos continuam abrindo normalmente no link externo
+        if (post.type === 'video') {
+            window.open(post.link, '_blank');
+            return;
+        }
+        setActivePost(post);
+    };
 
     return (
-        <section id="blog" className="blog-landing-section py-100">
-            <div className="container overflow-hidden">
+        <>
+            <section id="blog" className="blog-landing-section py-100">
+                <div className="container overflow-hidden">
 
-                {/* Header da Seção */}
-                <div className="row justify-content-center">
-                    <div className="col-md-10 col-lg-8">
-                        <div className="section-title text-center mb-50">
-                            <h2 className="blog-landing-title">Blog</h2>
-                            <p className="blog-landing-subtitle">
-                                Atualizações, novidades e conteúdos para sua saúde ocupacional
-                            </p>
+                    {/* Header da Seção */}
+                    <div className="row justify-content-center">
+                        <div className="col-md-10 col-lg-8">
+                            <div className="section-title text-center mb-50">
+                                <h2 className="blog-landing-title">Blog</h2>
+                                <p className="blog-landing-subtitle">
+                                    Atualizações, novidades e conteúdos para sua saúde ocupacional
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {/* Filtros */}
-                <div className="row">
-                    <div className="col-md-12">
-                        <div className="blog-filters">
-                            {categories.map((cat, index) => (
-                                <button
-                                    key={index}
-                                    className={`blog-filter-btn ${activeFilter === cat ? 'active' : ''}`}
-                                    onClick={() => {
-                                        setActiveFilter(cat);
-                                        setCurrentIndex(0); // Reset index on filter change
-                                    }}
-                                >
-                                    {cat}
-                                </button>
+                    {/* Filtros */}
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="blog-filters">
+                                {categories.map((cat, index) => (
+                                    <button
+                                        key={index}
+                                        className={`blog-filter-btn ${activeFilter === cat ? 'active' : ''}`}
+                                        onClick={() => {
+                                            setActiveFilter(cat);
+                                            setCurrentIndex(0); // Reset index on filter change
+                                        }}
+                                    >
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Carousel Container */}
+                    <div className="blog-carousel-wrapper">
+                        {/* Botões de Navegação */}
+                        <button className="carousel-nav-btn prev" onClick={prevSlide}>
+                            <span>&#10094;</span>
+                        </button>
+                        <button className="carousel-nav-btn next" onClick={nextSlide}>
+                            <span>&#10095;</span>
+                        </button>
+
+                        <div className="blog-carousel-track" style={{
+                            transform: `translateX(-${currentIndex * (100 / itemsToShow)}%)`
+                        }}>
+                            {filteredPosts.map(post => (
+                                <div key={post.id} className="blog-carousel-item">
+                                    <div className="blog-l-card">
+
+                                        {/* Imagem / Video */}
+                                        <div className="blog-l-thumb">
+                                            {post.type === "video" ? (
+                                                <iframe
+                                                    src={`https://www.youtube.com/embed/${post.videoId}?rel=0`}
+                                                    title={post.title}
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowFullScreen
+                                                ></iframe>
+                                            ) : (
+                                                <img src={post.thumbnail} alt={post.title} />
+                                            )}
+                                        </div>
+
+                                        {/* Conteúdo do Card */}
+                                        <div className="blog-l-content">
+                                            <div className="blog-l-meta">
+                                                <span className="blog-l-category">{post.category}</span>
+                                                <span className="blog-l-date">{post.date}</span>
+                                            </div>
+
+                                            <h5 className="blog-l-title">{post.title}</h5>
+                                            <p className="blog-l-desc">{excerpt(post.description)}</p>
+
+                                            <div className="blog-l-btn-wrapper">
+                                                <button
+                                                    type="button"
+                                                    className="blog-l-btn"
+                                                    onClick={() => handleReadMore(post)}
+                                                >
+                                                    {post.type === "video" ? "Assistir" : "Ler mais"}
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>
+
                 </div>
+            </section>
 
-                {/* Carousel Container */}
-                <div className="blog-carousel-wrapper">
-                    {/* Botões de Navegação */}
-                    <button className="carousel-nav-btn prev" onClick={prevSlide}>
-                        <span>&#10094;</span>
-                    </button>
-                    <button className="carousel-nav-btn next" onClick={nextSlide}>
-                        <span>&#10095;</span>
-                    </button>
+            {/* ── Modal / Overlay ── */}
+            {activePost && (
+                <div
+                    className="blog-modal-overlay"
+                    onClick={closeModal}
+                >
+                    <div
+                        className="blog-modal-content"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Botão fechar */}
+                        <button
+                            type="button"
+                            className="blog-modal-close"
+                            onClick={closeModal}
+                            aria-label="Fechar"
+                        >
+                            ✕
+                        </button>
 
-                    <div className="blog-carousel-track" style={{
-                        transform: `translateX(-${currentIndex * (100 / itemsToShow)}%)`
-                    }}>
-                        {filteredPosts.map(post => (
-                            <div key={post.id} className="blog-carousel-item">
-                                <div className="blog-l-card">
-
-                                    {/* Imagem / Video */}
-                                    <div className="blog-l-thumb">
-                                        {post.type === "video" ? (
-                                            <iframe
-                                                src={`https://www.youtube.com/embed/${post.videoId}?rel=0`}
-                                                title={post.title}
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowFullScreen
-                                            ></iframe>
-                                        ) : (
-                                            <img src={post.thumbnail} alt={post.title} />
-                                        )}
-                                    </div>
-
-                                    {/* Conteúdo do Card */}
-                                    <div className="blog-l-content">
-                                        <div className="blog-l-meta">
-                                            <span className="blog-l-category">{post.category}</span>
-                                            <span className="blog-l-date">{post.date}</span>
-                                        </div>
-
-                                        <h5 className="blog-l-title">{post.title}</h5>
-                                        <p className="blog-l-desc">{post.description}</p>
-
-                                        <div className="blog-l-btn-wrapper">
-                                            <a href={post.link} className="blog-l-btn">
-                                                {post.type === "video" ? "Assistir" : "Ler mais"}
-                                            </a>
-                                        </div>
-                                    </div>
-
+                        {/* Conteúdo do post */}
+                        <div className="blog-modal-body">
+                            {/* Overrides de alta especificidade para os posts embarcados */}
+                            <style>{`
+                                .blog-modal-body .page > section.bg--white,
+                                .blog-modal-body .page > section,
+                                .blog-modal-body #page > section.bg--white,
+                                .blog-modal-body #page > section {
+                                    background-color: #e6f2ed !important;
+                                    padding-top: 40px !important;
+                                    padding-bottom: 40px !important;
+                                }
+                                .blog-modal-body .container {
+                                    max-width: 100% !important;
+                                    padding-left: 30px !important;
+                                    padding-right: 30px !important;
+                                }
+                                .blog-modal-body [class*="col-lg"],
+                                .blog-modal-body [class*="col-xl"] {
+                                    flex: 0 0 100% !important;
+                                    max-width: 100% !important;
+                                    width: 100% !important;
+                                }
+                                .blog-modal-body .post-meta {
+                                    text-align: center !important;
+                                }
+                                .blog-modal-body .post-featured-img {
+                                    text-align: center !important;
+                                }
+                                .blog-modal-body .post-featured-img img {
+                                    border-radius: 12px !important;
+                                    max-height: 320px !important;
+                                }
+                                .blog-modal-body .post-meta h1,
+                                .blog-modal-body .post-meta .s-48 {
+                                    font-size: 26px !important;
+                                    line-height: 1.3 !important;
+                                }
+                                .blog-modal-body .post-meta .p-md {
+                                    font-size: 14px !important;
+                                }
+                                .blog-modal-body .cta-box,
+                                .blog-modal-body div.cta-box,
+                                .blog-modal-content .cta-box,
+                                .blog-modal-overlay .cta-box {
+                                    display: none !important;
+                                }
+                                .blog-modal-body .post-content h3 {
+                                    margin-top: 30px !important;
+                                    margin-bottom: 14px !important;
+                                    font-size: 20px !important;
+                                }
+                            `}</style>
+                            {postContentMap[activePost.link] || (
+                                <div style={{ padding: '60px 30px', textAlign: 'center', color: '#666' }}>
+                                    <p>Conteúdo não disponível.</p>
                                 </div>
-                            </div>
-                        ))}
+                            )}
+                        </div>
                     </div>
                 </div>
-
-            </div>
-        </section>
+            )}
+        </>
     );
 };
 
