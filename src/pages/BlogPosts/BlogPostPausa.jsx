@@ -37,11 +37,10 @@ const BlogPostPausa = () => {
                                     <li className="mb-2"><strong>Natureza:</strong> Se possível, olhe para o verde ou sinta a luz do sol; isso reduz os níveis de cortisol.</li>
                                 </ul>
 
-                                <div className="cta-box mt-80 p-50 rounded-4 text-center" style={{ backgroundColor: "#f2f7f8", border: "1px solid #7AB49E" }}>
-                                    <h4 className="w-700 mb-20" style={{ color: "#0A5046" }}>Quer implementar uma cultura de bem-estar?</h4>
-                                    <p className="mb-30">A MentoraMed ajuda sua empresa a criar ambientes que valorizam o equilíbrio.</p>
-                                    <a href="/#contato" className="btn btn--tra-black hover--theme" style={{ backgroundColor: '#0A5046', color: '#fff', padding: '12px 30px', borderRadius: '5px', textDecoration: 'none', fontWeight: 'bold' }}>
-                                        Ver Soluções
+                                <div className="cta-box mt-80 p-50 rounded-4" style={{ backgroundColor: "#FFF8E1", border: "1px solid #0A5046" }}>
+                                    <p className="mb-20">Quer saber mais sobre como implementar uma cultura de prevenção na sua empresa? Entre em contato com a equipe MentoraMed e descubra como podemos ajudar.</p>
+                                    <a href="/#contato" className="btn" style={{ backgroundColor: '#0A5046', color: '#fff', padding: '12px 30px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>
+                                        Fale com um especialista
                                     </a>
                                 </div>
                             </div>

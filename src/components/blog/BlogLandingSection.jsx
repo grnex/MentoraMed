@@ -239,69 +239,55 @@ const BlogLandingSection = () => {
                         className="blog-modal-content"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        {/* Botão fechar */}
-                        <button
-                            type="button"
-                            className="blog-modal-close"
-                            onClick={closeModal}
-                            aria-label="Fechar"
-                        >
-                            ✕
-                        </button>
+                        {/* ── Hero Image Header ── */}
+                        <div className="blog-modal-hero">
+                            <img
+                                src={activePost.thumbnail}
+                                alt={activePost.title}
+                                className="blog-modal-hero-img"
+                            />
+                            <div className="blog-modal-hero-overlay" />
 
-                        {/* Conteúdo do post */}
+                            {/* Top bar: Voltar + icons */}
+                            <div className="blog-modal-topbar">
+                                <button
+                                    type="button"
+                                    className="blog-modal-back"
+                                    onClick={closeModal}
+                                >
+                                    ← Voltar
+                                </button>
+                                <div className="blog-modal-actions">
+                                    <button type="button" className="blog-modal-action-btn" aria-label="Compartilhar">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg>
+                                    </button>
+                                    <button type="button" className="blog-modal-action-btn" aria-label="Salvar">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" /></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Category + Title on hero */}
+                            <div className="blog-modal-hero-content">
+                                <span className="blog-modal-hero-badge">{activePost.category}</span>
+                                <h1 className="blog-modal-hero-title">{activePost.title}</h1>
+                            </div>
+                        </div>
+
+                        {/* ── Meta bar: date + author ── */}
+                        <div className="blog-modal-meta-bar">
+                            <span className="blog-modal-meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+                                {activePost.date}
+                            </span>
+                            <span className="blog-modal-meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                                Equipe MentoraMed
+                            </span>
+                        </div>
+
+                        {/* ── Post body ── */}
                         <div className="blog-modal-body">
-                            {/* Overrides de alta especificidade para os posts embarcados */}
-                            <style>{`
-                                .blog-modal-body .page > section.bg--white,
-                                .blog-modal-body .page > section,
-                                .blog-modal-body #page > section.bg--white,
-                                .blog-modal-body #page > section {
-                                    background-color: #e6f2ed !important;
-                                    padding-top: 40px !important;
-                                    padding-bottom: 40px !important;
-                                }
-                                .blog-modal-body .container {
-                                    max-width: 100% !important;
-                                    padding-left: 30px !important;
-                                    padding-right: 30px !important;
-                                }
-                                .blog-modal-body [class*="col-lg"],
-                                .blog-modal-body [class*="col-xl"] {
-                                    flex: 0 0 100% !important;
-                                    max-width: 100% !important;
-                                    width: 100% !important;
-                                }
-                                .blog-modal-body .post-meta {
-                                    text-align: center !important;
-                                }
-                                .blog-modal-body .post-featured-img {
-                                    text-align: center !important;
-                                }
-                                .blog-modal-body .post-featured-img img {
-                                    border-radius: 12px !important;
-                                    max-height: 320px !important;
-                                }
-                                .blog-modal-body .post-meta h1,
-                                .blog-modal-body .post-meta .s-48 {
-                                    font-size: 26px !important;
-                                    line-height: 1.3 !important;
-                                }
-                                .blog-modal-body .post-meta .p-md {
-                                    font-size: 14px !important;
-                                }
-                                .blog-modal-body .cta-box,
-                                .blog-modal-body div.cta-box,
-                                .blog-modal-content .cta-box,
-                                .blog-modal-overlay .cta-box {
-                                    display: none !important;
-                                }
-                                .blog-modal-body .post-content h3 {
-                                    margin-top: 30px !important;
-                                    margin-bottom: 14px !important;
-                                    font-size: 20px !important;
-                                }
-                            `}</style>
                             {postContentMap[activePost.link] || (
                                 <div style={{ padding: '60px 30px', textAlign: 'center', color: '#666' }}>
                                     <p>Conteúdo não disponível.</p>

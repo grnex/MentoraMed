@@ -235,14 +235,14 @@ button.blog-l-btn {
 }
 
 /* ======================================
-   MODAL STYLES
+   MODAL STYLES — Redesign
    ====================================== */
 
 .blog-modal-overlay {
     position: fixed;
     inset: 0;
     z-index: 99999;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.65);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -252,21 +252,162 @@ button.blog-l-btn {
 .blog-modal-content {
     position: relative;
     width: 100%;
-    max-width: 720px;
-    max-height: 90vh;
+    max-width: 780px;
+    max-height: 92vh;
     overflow-y: auto;
-    background-color: #e6f2ed;
-    border: 3px solid #0A5046;
-    border-radius: 16px;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
     animation: blogModalSlideUp 0.3s ease;
 }
 
+/* ── Hero Image ── */
+.blog-modal-hero {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 18px 18px 0 0;
+}
+
+.blog-modal-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.blog-modal-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.15) 0%,
+        rgba(0, 0, 0, 0.55) 60%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    pointer-events: none;
+}
+
+/* ── Top bar (Voltar + actions) ── */
+.blog-modal-topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    z-index: 5;
+}
+
+.blog-modal-back {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: inherit;
+}
+
+.blog-modal-back:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.blog-modal-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.blog-modal-action-btn {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: none;
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.blog-modal-action-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Hero content (badge + title) ── */
+.blog-modal-hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 28px;
+    z-index: 5;
+}
+
+.blog-modal-hero-badge {
+    display: inline-block;
+    background-color: #0A5046;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.blog-modal-hero-title {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Meta bar ── */
+.blog-modal-meta-bar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 28px;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+
+.blog-modal-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #777;
+    font-weight: 500;
+}
+
+.blog-modal-meta-item svg {
+    color: #999;
+    flex-shrink: 0;
+}
+
+/* ── Post body ── */
 .blog-modal-body {
     padding: 0;
 }
 
-/* ── Overrides para blog posts dentro do modal ── */
+/* Overrides para os blog posts embarcados no modal */
 .blog-modal-body .page,
 .blog-modal-body #page {
     padding: 0;
@@ -274,80 +415,97 @@ button.blog-l-btn {
     min-height: unset;
 }
 
-.blog-modal-body section {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
-    background-color: #e6f2ed !important;
+.blog-modal-body .page > section,
+.blog-modal-body #page > section {
+    padding-top: 10px !important;
+    padding-bottom: 30px !important;
+    background-color: #ffffff !important;
 }
 
+.blog-modal-body .container {
+    max-width: 100% !important;
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+}
+
+.blog-modal-body [class*="col-lg"],
+.blog-modal-body [class*="col-xl"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* Esconder post-meta e post-featured-img (já exibimos no hero) */
 .blog-modal-body .post-meta {
-    margin-bottom: 24px !important;
-}
-
-.blog-modal-body .post-meta h1 {
-    font-size: 28px !important;
-    line-height: 1.3 !important;
-}
-
-.blog-modal-body .post-meta .p-md {
-    font-size: 14px !important;
-}
-
-.blog-modal-body .post-featured-img {
-    margin-bottom: 30px !important;
-}
-
-.blog-modal-body .post-featured-img img {
-    border-radius: 12px !important;
-    max-height: 320px !important;
-}
-
-.blog-modal-body .post-content {
-    font-size: 1rem !important;
-    line-height: 1.75 !important;
-    color: #333 !important;
-}
-
-.blog-modal-body .post-content h3 {
-    margin-top: 30px !important;
-    margin-bottom: 14px !important;
-    font-size: 20px !important;
-}
-
-.blog-modal-body .cta-box {
     display: none !important;
 }
 
-/* Botão fechar */
-.blog-modal-close {
-    position: sticky;
-    top: 12px;
-    float: right;
-    margin-right: 12px;
-    z-index: 10;
-    background: rgba(230, 242, 237, 0.95);
-    backdrop-filter: blur(6px);
-    border: 1px solid #d4e6df;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #0A5046;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: background 0.2s, transform 0.2s;
+.blog-modal-body .post-featured-img {
+    display: none !important;
 }
 
-.blog-modal-close:hover {
-    background: #fff;
-    transform: scale(1.1);
+/* Post content typography */
+.blog-modal-body .post-content {
+    font-size: 1rem !important;
+    line-height: 1.8 !important;
+    color: #444 !important;
 }
 
-/* Scrollbar elegante dentro do modal */
+.blog-modal-body .post-content .lead {
+    font-size: 1.05rem !important;
+    font-weight: 500;
+    color: #333 !important;
+}
+
+/* Golden/amber section headings */
+.blog-modal-body .post-content h3 {
+    margin-top: 32px !important;
+    margin-bottom: 14px !important;
+    font-size: 20px !important;
+    color: #B8860B !important;
+    font-weight: 700 !important;
+}
+
+/* CTA box — yellow style */
+.blog-modal-body .cta-box {
+    background-color: #FFF8E1 !important;
+    border: 1px solid #0A5046 !important;
+    border-radius: 12px !important;
+    padding: 30px !important;
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
+    text-align: left !important;
+    display: block !important;
+}
+
+.blog-modal-body .cta-box h4 {
+    display: none !important;
+}
+
+.blog-modal-body .cta-box p {
+    font-size: 14px !important;
+    color: #444 !important;
+    margin-bottom: 16px !important;
+}
+
+.blog-modal-body .cta-box a {
+    background-color: #0A5046 !important;
+    color: #fff !important;
+    padding: 12px 28px !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    border: none !important;
+    transition: background 0.2s !important;
+}
+
+.blog-modal-body .cta-box a:hover {
+    background-color: #07372f !important;
+}
+
+/* ── Scrollbar ── */
 .blog-modal-content::-webkit-scrollbar {
     width: 6px;
 }
@@ -357,16 +515,15 @@ button.blog-l-btn {
 }
 
 .blog-modal-content::-webkit-scrollbar-thumb {
-    background: #b0c9bf;
+    background: #ccc;
     border-radius: 3px;
 }
 
-/* Animações */
+/* ── Animations ── */
 @keyframes blogModalFadeIn {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
@@ -377,14 +534,13 @@ button.blog-l-btn {
         opacity: 0;
         transform: translateY(30px) scale(0.97);
     }
-
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
 }
 
-/* Full-screen no mobile */
+/* ── Mobile fullscreen ── */
 @media (max-width: 768px) {
     .blog-modal-content {
         max-width: 100% !important;
@@ -393,11 +549,22 @@ button.blog-l-btn {
         border-radius: 0 !important;
     }
 
-    .blog-modal-body .post-meta h1 {
-        font-size: 24px !important;
+    .blog-modal-hero {
+        height: 240px;
+        border-radius: 0;
     }
 
-    .blog-modal-body .post-featured-img img {
-        border-radius: 0 !important;
+    .blog-modal-hero-title {
+        font-size: 22px;
+    }
+
+    .blog-modal-meta-bar {
+        padding: 12px 20px;
+        gap: 16px;
+    }
+
+    .blog-modal-body .container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
     }
 }

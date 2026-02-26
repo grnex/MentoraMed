@@ -71,11 +71,10 @@ const BlogPostNR1 = () => {
                                     <li className="mb-2"><strong>Cultura Saudável:</strong> Melhoria no clima organizacional e na segurança psicológica.</li>
                                 </ul>
 
-                                <div className="cta-box mt-80 p-50 rounded-4 text-center" style={{ backgroundColor: "#f2f7f8", border: "1px solid #7AB49E" }}>
-                                    <h4 className="w-700 mb-20" style={{ color: "#0A5046" }}>Sua empresa está em conformidade com a nova NR-1?</h4>
-                                    <p className="mb-30">A MentoraMed oferece soluções completas para a implementação do GRO focado em riscos psicossociais.</p>
-                                    <a href="/#contato" className="btn btn--tra-black hover--theme" style={{ backgroundColor: '#0A5046', color: '#fff', padding: '12px 30px', borderRadius: '5px', textDecoration: 'none', fontWeight: 'bold' }}>
-                                        Agendar Consultoria
+                                <div className="cta-box mt-80 p-50 rounded-4" style={{ backgroundColor: "#FFF8E1", border: "1px solid #0A5046" }}>
+                                    <p className="mb-20">Quer saber mais sobre como implementar uma cultura de prevenção na sua empresa? Entre em contato com a equipe MentoraMed e descubra como podemos ajudar.</p>
+                                    <a href="/#contato" className="btn" style={{ backgroundColor: '#0A5046', color: '#fff', padding: '12px 30px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>
+                                        Fale com um especialista
                                     </a>
                                 </div>
                             </div>

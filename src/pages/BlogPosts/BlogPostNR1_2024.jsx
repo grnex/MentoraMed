@@ -36,11 +36,10 @@ const BlogPostNR1_2024 = () => {
                                     <li className="mb-2"><strong>Treinamentos:</strong> Exigência de métodos que garantam a absorção do conhecimento.</li>
                                 </ul>
 
-                                <div className="cta-box mt-80 p-50 rounded-4 text-center" style={{ backgroundColor: "#f2f7f8", border: "1px solid #7AB49E" }}>
-                                    <h4 className="w-700 mb-20" style={{ color: "#0A5046" }}>Sua empresa ainda tem dúvidas sobre 2024?</h4>
-                                    <p className="mb-30">Ajudamos a revisar sua base de dados e garantir que nenhum detalhe ficou para trás.</p>
-                                    <a href="/#contato" className="btn btn--tra-black hover--theme" style={{ backgroundColor: '#0A5046', color: '#fff', padding: '12px 30px', borderRadius: '5px', textDecoration: 'none', fontWeight: 'bold' }}>
-                                        Consultar Especialista
+                                <div className="cta-box mt-80 p-50 rounded-4" style={{ backgroundColor: "#FFF8E1", border: "1px solid #0A5046" }}>
+                                    <p className="mb-20">Quer saber mais sobre como implementar uma cultura de prevenção na sua empresa? Entre em contato com a equipe MentoraMed e descubra como podemos ajudar.</p>
+                                    <a href="/#contato" className="btn" style={{ backgroundColor: '#0A5046', color: '#fff', padding: '12px 30px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>
+                                        Fale com um especialista
                                     </a>
                                 </div>
                             </div>

@@ -37,11 +37,10 @@ const BlogPostRiscos = () => {
                                     <li className="mb-2"><strong>Plano de Ação:</strong> Intervenções focadas na melhoria de processos e suporte individual.</li>
                                 </ul>
 
-                                <div className="cta-box mt-80 p-50 rounded-4 text-center" style={{ backgroundColor: "#f2f7f8", border: "1px solid #7AB49E" }}>
-                                    <h4 className="w-700 mb-20" style={{ color: "#0A5046" }}>Deseja um mapeamento completo dos riscos da sua empresa?</h4>
-                                    <p className="mb-30">Nossa plataforma SaaS automatiza a coleta e análise de dados psicossociais.</p>
-                                    <a href="/#contato" className="btn btn--tra-black hover--theme" style={{ backgroundColor: '#0A5046', color: '#fff', padding: '12px 30px', borderRadius: '5px', textDecoration: 'none', fontWeight: 'bold' }}>
-                                        Agendar Demo
+                                <div className="cta-box mt-80 p-50 rounded-4" style={{ backgroundColor: "#FFF8E1", border: "1px solid #0A5046" }}>
+                                    <p className="mb-20">Quer saber mais sobre como implementar uma cultura de prevenção na sua empresa? Entre em contato com a equipe MentoraMed e descubra como podemos ajudar.</p>
+                                    <a href="/#contato" className="btn" style={{ backgroundColor: '#0A5046', color: '#fff', padding: '12px 30px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>
+                                        Fale com um especialista
                                     </a>
                                 </div>
                             </div>
