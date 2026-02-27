@@ -61,7 +61,7 @@ const blogPosts = [
     }
 ];
 
-const categories = ["Todos", "NR-1", "Saúde Ocupacional", "Vídeo"];
+const categories = ["Todos", "Gestão", "NR-1", "Saúde Mental"];
 
 const BlogLandingSection = () => {
     const [activeFilter, setActiveFilter] = useState("Todos");
@@ -137,12 +137,18 @@ const BlogLandingSection = () => {
                 <div className="container overflow-hidden">
 
                     {/* Header da Seção */}
-                    <div className="row justify-content-center">
-                        <div className="col-md-10 col-lg-8">
-                            <div className="section-title text-center mb-50">
-                                <h2 className="blog-landing-title">Blog</h2>
+                    <div className="row">
+                        <div className="col-lg-7">
+                            <div className="blog-header mb-50">
+                                <div className="blog-header-label">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg>
+                                    BLOG
+                                </div>
+                                <h2 className="blog-landing-title">
+                                    Insights para um ambiente de trabalho mais saudável
+                                </h2>
                                 <p className="blog-landing-subtitle">
-                                    Atualizações, novidades e conteúdos para sua saúde ocupacional
+                                    Artigos sobre saúde ocupacional, NR-1, gestão de riscos psicossociais e bem-estar no trabalho.
                                 </p>
                             </div>
                         </div>
@@ -158,7 +164,7 @@ const BlogLandingSection = () => {
                                         className={`blog-filter-btn ${activeFilter === cat ? 'active' : ''}`}
                                         onClick={() => {
                                             setActiveFilter(cat);
-                                            setCurrentIndex(0); // Reset index on filter change
+                                            setCurrentIndex(0);
                                         }}
                                     >
                                         {cat}
