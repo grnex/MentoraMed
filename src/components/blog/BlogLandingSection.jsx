@@ -61,19 +61,16 @@ const blogPosts = [
     }
 ];
 
-const categories = ["Todos", "Gestão", "NR-1", "Saúde Mental"];
+
 
 const BlogLandingSection = () => {
-    const [activeFilter, setActiveFilter] = useState("Todos");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsToShow, setItemsToShow] = useState(
         window.innerWidth > 991 ? 3 : window.innerWidth > 767 ? 2 : 1
     );
     const [activePost, setActivePost] = useState(null);
 
-    const filteredPosts = activeFilter === "Todos"
-        ? blogPosts
-        : blogPosts.filter(post => post.category === activeFilter);
+    const filteredPosts = blogPosts;
 
     // Update itemsToShow on resize
     React.useEffect(() => {
@@ -85,7 +82,7 @@ const BlogLandingSection = () => {
     }, []);
 
     const nextSlide = () => {
-        if (currentIndex < filteredPosts.length - itemsToShow) {
+        if (currentIndex < blogPosts.length - itemsToShow) {
             setCurrentIndex(currentIndex + 1);
         } else {
             setCurrentIndex(0); // Loop back
@@ -96,7 +93,7 @@ const BlogLandingSection = () => {
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);
         } else {
-            setCurrentIndex(Math.max(0, filteredPosts.length - itemsToShow)); // Loop to end
+            setCurrentIndex(Math.max(0, blogPosts.length - itemsToShow)); // Loop to end
         }
     };
 
@@ -154,25 +151,7 @@ const BlogLandingSection = () => {
                         </div>
                     </div>
 
-                    {/* Filtros */}
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="blog-filters">
-                                {categories.map((cat, index) => (
-                                    <button
-                                        key={index}
-                                        className={`blog-filter-btn ${activeFilter === cat ? 'active' : ''}`}
-                                        onClick={() => {
-                                            setActiveFilter(cat);
-                                            setCurrentIndex(0);
-                                        }}
-                                    >
-                                        {cat}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+
 
                     {/* Carousel Container */}
                     <div className="blog-carousel-wrapper">
