@@ -139,9 +139,9 @@ export default function Chatbot() {
   };
 
   return (
-    <>
+    <div className="mentoramed-chatbot-wrapper">
       <button
-        className="chatbot-toggle"
+        className="mentoramed-chatbot-toggle-btn"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label={isOpen ? "Fechar chat" : "Abrir chat"}
       >
@@ -158,39 +158,57 @@ export default function Chatbot() {
       </button>
 
       {isOpen && (
-        <div className="chatbot-window">
-          <div className="chatbot-header">
-            <div className="chatbot-header-info">
-              <div className="chatbot-avatar">M</div>
+        <div className="mentoramed-chatbot-window">
+          <div className="mentoramed-chatbot-header">
+            <div className="mentoramed-chatbot-header-title">
+              <div className="mentoramed-chatbot-bot-icon">
+                <div style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--bruswick-green, #0A5046)',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 'bold'
+                }}>M</div>
+              </div>
               <div>
-                <span className="chatbot-title">MentoraMed Assistant</span>
-                <span className="chatbot-status">● Online</span>
+                <span style={{ display: 'block' }}>Assistente MentoraMed</span>
+                <span style={{ fontSize: '12px', opacity: 0.8 }}>● Online</span>
               </div>
             </div>
-            <button className="chatbot-close" onClick={() => setIsOpen(false)} aria-label="Fechar">✕</button>
+            <button className="mentoramed-chatbot-close-btn" onClick={() => setIsOpen(false)} aria-label="Fechar">✕</button>
           </div>
 
-          <div className="chatbot-messages">
+          <div className="mentoramed-chatbot-messages">
             {messages.map((msg, i) => (
-              <div key={i} className={`chatbot-message ${msg.sender}`}>
-                <div className="chatbot-bubble">{msg.text}</div>
+              <div key={i} className={`mentoramed-chatbot-message-row ${msg.sender === 'user' ? 'user-row' : 'bot-row'}`}>
+                <div className={`mentoramed-chatbot-bubble ${msg.sender}-bubble`}>
+                  {msg.text}
+                </div>
               </div>
             ))}
             {isLoading && (
-              <div className="chatbot-message bot">
-                <div className="chatbot-bubble chatbot-typing">
-                  <span></span><span></span><span></span>
+              <div className="mentoramed-chatbot-message-row bot-row">
+                <div className="mentoramed-chatbot-bubble bot-bubble">
+                  <div className="chatbot-typing" style={{ display: 'flex', gap: '4px' }}>
+                    <span style={{ width: '6px', height: '6px', backgroundColor: '#0A5046', borderRadius: '50%' }}></span>
+                    <span style={{ width: '6px', height: '6px', backgroundColor: '#0A5046', borderRadius: '50%' }}></span>
+                    <span style={{ width: '6px', height: '6px', backgroundColor: '#0A5046', borderRadius: '50%' }}></span>
+                  </div>
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="chatbot-input-area">
+          <div className="mentoramed-chatbot-input-area">
             <input
               ref={inputRef}
               type="text"
-              className="chatbot-input"
+              className="mentoramed-chatbot-input"
               placeholder="Digite sua mensagem..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -198,7 +216,7 @@ export default function Chatbot() {
               disabled={isLoading}
             />
             <button
-              className="chatbot-send"
+              className="mentoramed-chatbot-send-btn"
               onClick={handleSend}
               disabled={isLoading || !input.trim()}
               aria-label="Enviar"
@@ -211,6 +229,6 @@ export default function Chatbot() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
