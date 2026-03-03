@@ -1,0 +1,194 @@
+.mentoramed-chatbot-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  font-family: var(--base-font, 'Inter', sans-serif);
+}
+
+.mentoramed-chatbot-toggle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--theme-color, #041C19);
+  color: var(--header-color, #FAF1E0);
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.mentoramed-chatbot-toggle-btn:hover {
+  transform: scale(1.05);
+  background-color: var(--bruswick-green, #0A5046);
+}
+
+/* Chat Window */
+.mentoramed-chatbot-window {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  width: 350px;
+  height: 500px;
+  max-height: calc(100vh - 120px);
+  background-color: var(--white, #fff);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--smoke, #e7e7e7);
+  animation: slideUpFade 0.3s ease;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mentoramed-chatbot-header {
+  background-color: var(--theme-color, #041C19);
+  color: var(--header-color, #FAF1E0);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--bruswick-green, #0A5046);
+}
+
+.mentoramed-chatbot-header-title {
+  font-family: var(--main-font, 'Onest', sans-serif);
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mentoramed-chatbot-bot-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mentoramed-chatbot-close-btn {
+  background: none;
+  border: none;
+  color: var(--header-color, #FAF1E0);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.mentoramed-chatbot-close-btn:hover {
+  opacity: 1;
+}
+
+.mentoramed-chatbot-messages {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--azure, #f2f7f8);
+}
+
+.mentoramed-chatbot-message-row {
+  display: flex;
+  width: 100%;
+}
+
+.mentoramed-chatbot-message-row.user-row {
+  justify-content: flex-end;
+}
+
+.mentoramed-chatbot-message-row.bot-row {
+  justify-content: flex-start;
+}
+
+.mentoramed-chatbot-bubble {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.bot-bubble {
+  background-color: var(--white, #fff);
+  color: var(--bruswick-green, #0A5046);
+  border: 1px solid var(--smoke, #e7e7e7);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom-left-radius: 4px;
+}
+
+.user-bubble {
+  background-color: var(--bruswick-green, #0A5046);
+  color: var(--white, #fff);
+  border-bottom-right-radius: 4px;
+}
+
+.mentoramed-chatbot-input-area {
+  display: flex;
+  padding: 12px;
+  background-color: var(--white, #fff);
+  border-top: 1px solid var(--smoke, #e7e7e7);
+  gap: 8px;
+}
+
+.mentoramed-chatbot-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--silver, #ccc);
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.mentoramed-chatbot-input:focus {
+  border-color: var(--bruswick-green, #0A5046);
+}
+
+.mentoramed-chatbot-send-btn {
+  background-color: var(--theme-color, #041C19);
+  color: var(--header-color, #FAF1E0);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mentoramed-chatbot-send-btn:hover {
+  background-color: var(--bruswick-green, #0A5046);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .mentoramed-chatbot-window {
+    width: calc(100vw - 40px);
+    right: 20px;
+    /* Align within screen */
+  }
+}

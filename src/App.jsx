@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/header/Header.jsx";
 import FooterSection from "./components/footer/FooterSection.jsx";
 import WhatsappSticky from "./components/WhatsappSticky.jsx";
+import Chatbot from "./components/chatbot/Chatbot.jsx";
 
 import LandingPage from "./pages/LandingPage.jsx";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy.jsx";
@@ -12,6 +13,7 @@ import BlogPostNR1 from "./pages/BlogPosts/BlogPostNR1.jsx";
 import BlogPostPausa from "./pages/BlogPosts/BlogPostPausa.jsx";
 import BlogPostNR1_2024 from "./pages/BlogPosts/BlogPostNR1_2024.jsx";
 import BlogPostRiscos from "./pages/BlogPosts/BlogPostRiscos.jsx";
+
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
 
       <FooterSection />
       <WhatsappSticky />
+      <Chatbot />
     </Router>
   );
 }
