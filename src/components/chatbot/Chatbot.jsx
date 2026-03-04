@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./chatbot.css";
 
 const GEMINI_API_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 const SYSTEM_PROMPT = `Você é o assistente virtual da MentoraMed, uma plataforma digital de saúde corporativa brasileira.
@@ -36,6 +36,11 @@ DIRETRIZES DE ATENDIMENTO:
 - Ao final de respostas sobre serviços, faça UMA pergunta qualificadora para entender melhor a necessidade do usuário
 - Não invente preços ou prazos — diga que um consultor entrará em contato para detalhes comerciais
 
+FORMATAÇÃO:
+- Use parágrafos curtos e objetivos
+- Quando listar itens, use bullet points com "•"
+- Destaque termos importantes com **negrito**
+
 IDENTIDADE:
 - Nome: Assistente MentoraMed
 - Tom: profissional, acolhedor e confiante
@@ -48,12 +53,74 @@ const initialMessages = [
   },
 ];
 
+/**
+ * Simple markdown-like formatter for bot responses.
+ * Handles: **bold**, bullet points (• or -), and paragraphs.
+ */
+function formatBotMessage(text) {
+  if (!text) return null;
+
+  const paragraphs = text.split(/\n\n+/);
+
+  return paragraphs.map((paragraph, pIdx) => {
+    const lines = paragraph.split("\n");
+
+    const formattedLines = lines.map((line, lIdx) => {
+      // Check if it's a bullet point
+      const bulletMatch = line.match(/^\s*[•\-\*]\s+(.*)$/);
+      if (bulletMatch) {
+        return (
+          <li key={lIdx} className="chatbot-list-item">
+            {formatInlineText(bulletMatch[1])}
+          </li>
+        );
+      }
+      return (
+        <span key={lIdx}>
+          {formatInlineText(line)}
+          {lIdx < lines.length - 1 && <br />}
+        </span>
+      );
+    });
+
+    // If this paragraph has bullet items, wrap in <ul>
+    const hasBullets = lines.some((l) => /^\s*[•\-\*]\s+/.test(l));
+    if (hasBullets) {
+      return (
+        <ul key={pIdx} className="chatbot-bullet-list">
+          {formattedLines}
+        </ul>
+      );
+    }
+
+    return (
+      <p key={pIdx} className="chatbot-paragraph">
+        {formattedLines}
+      </p>
+    );
+  });
+}
+
+/**
+ * Handles **bold** inline formatting.
+ */
+function formatInlineText(text) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+}
+
 export default function Chatbot() {
   const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [conversationHistory, setConversationHistory] = useState([]);
+  const [apiKeyMissing] = useState(!GEMINI_API_KEY);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -66,6 +133,10 @@ export default function Chatbot() {
   }, [isOpen]);
 
   const callGemini = async (userMessage) => {
+    if (apiKeyMissing) {
+      throw new Error("API_KEY_MISSING");
+    }
+
     const updatedHistory = [
       ...conversationHistory,
       { role: "user", parts: [{ text: userMessage }] },
@@ -90,6 +161,7 @@ export default function Chatbot() {
 
     if (!response.ok) {
       const err = await response.json();
+      console.error("Gemini API Error:", err);
       throw new Error(err?.error?.message || "Erro na API Gemini");
     }
 
@@ -119,12 +191,13 @@ export default function Chatbot() {
       setMessages((prev) => [...prev, { sender: "bot", text: botText }]);
     } catch (error) {
       console.error("Gemini error:", error);
+      const errorMessage =
+        error.message === "API_KEY_MISSING"
+          ? "⚠️ Chave da API não configurada. Por favor, configure a variável VITE_GEMINI_API_KEY no arquivo .env"
+          : "Ops! Tive um problema para me conectar. Por favor, tente novamente em instantes.";
       setMessages((prev) => [
         ...prev,
-        {
-          sender: "bot",
-          text: "Ops! Tive um problema para me conectar. Por favor, tente novamente em instantes.",
-        },
+        { sender: "bot", text: errorMessage },
       ]);
     } finally {
       setIsLoading(false);
@@ -186,17 +259,17 @@ export default function Chatbot() {
             {messages.map((msg, i) => (
               <div key={i} className={`mentoramed-chatbot-message-row ${msg.sender === 'user' ? 'user-row' : 'bot-row'}`}>
                 <div className={`mentoramed-chatbot-bubble ${msg.sender}-bubble`}>
-                  {msg.text}
+                  {msg.sender === 'bot' ? formatBotMessage(msg.text) : msg.text}
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="mentoramed-chatbot-message-row bot-row">
                 <div className="mentoramed-chatbot-bubble bot-bubble">
-                  <div className="chatbot-typing" style={{ display: 'flex', gap: '4px' }}>
-                    <span style={{ width: '6px', height: '6px', backgroundColor: '#0A5046', borderRadius: '50%' }}></span>
-                    <span style={{ width: '6px', height: '6px', backgroundColor: '#0A5046', borderRadius: '50%' }}></span>
-                    <span style={{ width: '6px', height: '6px', backgroundColor: '#0A5046', borderRadius: '50%' }}></span>
+                  <div className="chatbot-typing">
+                    <span className="chatbot-typing-dot"></span>
+                    <span className="chatbot-typing-dot"></span>
+                    <span className="chatbot-typing-dot"></span>
                   </div>
                 </div>
               </div>

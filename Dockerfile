@@ -8,6 +8,11 @@ RUN npm ci
 
 # Faz o build
 COPY . .
+
+# Variáveis VITE_* são injetadas no bundle durante o build
+ARG VITE_GEMINI_API_KEY
+ENV VITE_GEMINI_API_KEY=$VITE_GEMINI_API_KEY
+
 RUN npm run build
 
 # ---- Runtime (PHP + Nginx) ----
