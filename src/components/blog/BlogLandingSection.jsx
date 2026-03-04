@@ -22,7 +22,7 @@ const blogPosts = [
     {
         id: 1,
         category: "NR-1",
-        title: "Implementação da NR-1: O que mudou em 2024?",
+        title: "Implementação da NR-1: O que mudou em 2025?",
         description: "Entenda as novas exigências da norma e como sua empresa pode ser adequar rapidamente às mudanças mais recentes mantendo o bem-estar da equipe.",
         date: "15 Fev 2024",
         link: "/blog/nr1-2024",
