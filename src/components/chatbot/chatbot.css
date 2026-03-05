@@ -6,28 +6,93 @@
   font-family: var(--base-font, 'Inter', sans-serif);
 }
 
+/* ── Botão toggle com glow rotativo ── */
 .mentoramed-chatbot-toggle-btn {
+  position: relative;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: var(--theme-color, #041C19);
+  background: radial-gradient(circle at 35% 35%, #1f6b45, var(--theme-color, #041C19));
   color: var(--header-color, #FAF1E0);
   border: none;
   font-size: 28px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.25s ease;
+  z-index: 1;
 }
 
+/* Anel de glow girando */
+.mentoramed-chatbot-toggle-btn::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,
+      #22c55e 0%,
+      #16a34a 25%,
+      #041C19 50%,
+      #16a34a 75%,
+      #22c55e 100%);
+  animation: mentora-spin-glow 2.5s linear infinite;
+  filter: blur(2.5px);
+  z-index: -1;
+}
+
+/* Hover: acelera o glow + escala */
 .mentoramed-chatbot-toggle-btn:hover {
-  transform: scale(1.05);
-  background-color: var(--bruswick-green, #0A5046);
+  transform: scale(1.1);
 }
 
-/* Chat Window */
+.mentoramed-chatbot-toggle-btn:hover::before {
+  animation-duration: 1.2s;
+  filter: blur(3.5px);
+}
+
+/* Bolinha verde "online" */
+.mentoramed-chatbot-toggle-btn::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2.5px solid #f0ece2;
+  box-shadow: 0 0 6px #22c55e;
+  animation: mentora-dot-pulse 2s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes mentora-spin-glow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes mentora-dot-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 4px #22c55e;
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 0 10px #22c55e;
+    transform: scale(1.15);
+  }
+}
+
+/* ── Chat Window ── */
 .mentoramed-chatbot-window {
   position: absolute;
   bottom: 80px;
@@ -144,7 +209,6 @@
   border-bottom-right-radius: 4px;
 }
 
-/* Bot message markdown formatting */
 .bot-bubble .chatbot-paragraph {
   margin: 0 0 8px 0;
   font-size: 13px;
@@ -190,7 +254,7 @@
   color: var(--theme-color, #041C19);
 }
 
-/* Typing indicator animation */
+/* Typing indicator */
 .chatbot-typing {
   display: flex;
   gap: 5px;
@@ -280,7 +344,6 @@
   cursor: not-allowed;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 480px) {
   .mentoramed-chatbot-window {
     width: calc(100vw - 40px);
