@@ -3,15 +3,15 @@ const FooterServices = () => (
     <div className="footer-location">
       <h6 className="color--old-lace">Serviços</h6>
       <p>
-        <a href="/servicos">Telepsicologia</a>
+        <a href="/servicos#telepsicologia">Telepsicologia</a>
         <br />
-        <a href="/servicos">Conformidade NR-1</a>
+        <a href="/servicos#nr1">Conformidade NR-1</a>
         <br />
-        <a href="/servicos">Consultoria em Saúde Mental</a>
+        <a href="/servicos#consultoria">Consultoria em Saúde Mental</a>
         <br />
-        <a href="/servicos">Treinamentos Corporativos</a>
+        <a href="/servicos#treinamentos">Treinamentos Corporativos</a>
         <br />
-        <a href="/servicos">Plataforma SaaS</a>
+        <a href="/servicos#saas">Plataforma SaaS</a>
         <br />
       </p>
     </div>

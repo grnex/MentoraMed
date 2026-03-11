@@ -2,7 +2,7 @@ import brandsData from './brandsData';
 import BrandLogo from './BrandLogo';
 
 const BrandsSection = () => (
-  <div className="py-120 brands-4 brands-section division">
+  <div className="pt-120 pb-80 mt-100 brands-4 brands-section division">
     <div className="container-xxl darker-old-lace r-20 py-30 pb-60">
       <div className="row justify-content-center">
         <div className="col-md-10 col-lg-9">
