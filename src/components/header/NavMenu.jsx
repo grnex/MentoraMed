@@ -24,16 +24,19 @@ const NavMenu = ({ closeMobileMenu }) => {
         </li>
 
         <li aria-haspopup="true" className="h-link">
+          <a href="/#servicos" className="h-scroll-link" onClick={closeMobileMenu}>
+            Serviços
+          </a>
+        </li>
+
+
+        <li aria-haspopup="true" className="h-link">
           <a href="/#beneficios" className="h-scroll-link" onClick={closeMobileMenu}>
             Beneficios
           </a>
         </li>
 
-        <li aria-haspopup="true" className="h-link">
-          <a href="/#nr-1" className="h-scroll-link" onClick={closeMobileMenu}>
-            NR-1
-          </a>
-        </li>
+
 
         <li aria-haspopup="true" className="h-link">
           <a href="/#blog" className="h-scroll-link" onClick={closeMobileMenu}>
