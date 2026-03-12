@@ -5,7 +5,7 @@ import BrandsSection from "../components/brands/BrandsSection.jsx";
 import NR1Section from "../components/nr1/NR1Section.jsx";
 import ResponsabilidadeSection from "../components/responsabilidade/ResponsabilidadeSection.jsx";
 import FAQSection from "../components/faq/FAQSection.jsx";
-import ServicesAccordion from "../components/services/ServicesAccordion.jsx";
+import ServicesSection from "../components/services/ServicesSection.jsx";
 import BenefitsSection from "../components/benefits/BenefitsSection.jsx";
 import FAQNR1Section from "../components/faqnr1/FAQNR1Section.jsx";
 import BlogLandingSection from "../components/blog/BlogLandingSection.jsx";
@@ -20,7 +20,7 @@ function LandingPage() {
       <NR1Section />
       <ResponsabilidadeSection />
       <FAQSection />
-      <ServicesAccordion />
+      <ServicesSection />
       <BenefitsSection />
       <FAQNR1Section />
       <BlogLandingSection />

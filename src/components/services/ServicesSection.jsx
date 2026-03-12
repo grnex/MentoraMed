@@ -1,119 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import ServicesTitle from "./ServicesTitle";
+import ServicesItem from "./ServicesItem";
+import servicesData from "./servicesData";
 
-const servicesData = [
-  {
-    number: "01",
-    title: "Telepsicologia",
-    summary: "Atendimento psicológico online para colaboradores",
-    description:
-      "Sessões individuais por videochamada com psicólogos especializados em saúde ocupacional. Reduz absenteísmo, melhora o clima organizacional e aumenta a produtividade — tudo com total sigilo profissional.",
-    benefits: [
-      "Sessões individuais por videochamada",
-      "Psicólogos especializados em saúde ocupacional",
-      "Relatórios gerenciais sem quebra de sigilo",
-      "Agendamento 24h pela plataforma",
-    ],
-  },
-  {
-    number: "02",
-    title: "Conformidade NR-1",
-    summary: "Gestão de riscos psicossociais com respaldo legal",
-    description:
-      "Adequação completa à NR-1 atualizada: mapeamento de riscos psicossociais, plano de ação documentado e suporte em caso de fiscalização. Sua empresa protegida e em conformidade.",
-    benefits: [
-      "Diagnóstico de riscos psicossociais",
-      "Plano de ação documentado",
-      "Treinamentos obrigatórios incluídos",
-      "Suporte em caso de fiscalização",
-    ],
-  },
-  {
-    number: "03",
-    title: "Consultoria em Saúde Mental",
-    summary: "Estratégia personalizada para o seu negócio",
-    description:
-      "Estruturamos programas de bem-estar corporativo sob medida: análise da cultura organizacional, desenvolvimento de políticas de saúde mental e acompanhamento contínuo com indicadores de resultado.",
-    benefits: [
-      "Diagnóstico organizacional aprofundado",
-      "Programa personalizado de bem-estar",
-      "Indicadores e métricas de resultado",
-      "Reuniões de acompanhamento mensais",
-    ],
-  },
-  {
-    number: "04",
-    title: "Treinamentos Corporativos",
-    summary: "Capacitação prática para líderes e equipes",
-    description:
-      "Workshops sobre saúde mental, liderança humanizada, gestão de conflitos e prevenção ao burnout. Conteúdo aplicável no dia a dia, disponível ao vivo ou gravado, com certificado de participação.",
-    benefits: [
-      "Workshops ao vivo ou gravados",
-      "Conteúdo adaptado ao seu setor",
-      "Certificado de participação",
-      "Material de apoio incluso",
-    ],
-  },
-  {
-    number: "05",
-    title: "Plataforma SaaS",
-    summary: "Tecnologia para gestão de saúde ocupacional",
-    description:
-      "Dashboard completo para gestão do programa de saúde mental: agendamentos, comunicados, relatórios automáticos e indicadores em tempo real — tudo em um só lugar, acessível de qualquer dispositivo.",
-    benefits: [
-      "Dashboard em tempo real",
-      "Gestão de agendamentos integrada",
-      "Comunicação interna centralizada",
-      "Relatórios automáticos em PDF",
-    ],
-  },
-];
-
-function AccordionItem({ service, isOpen, onToggle }) {
-  const contentRef = useRef(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      setHeight(isOpen ? contentRef.current.scrollHeight : 0);
-    }
-  }, [isOpen]);
-
-  return (
-    <div className={`sv-item ${isOpen ? "sv-open" : ""}`}>
-      <button className="sv-trigger" onClick={onToggle} aria-expanded={isOpen}>
-        <div className="sv-trigger-left">
-          <span className="sv-num">{service.number}</span>
-          <div>
-            <span className="sv-title">{service.title}</span>
-            <span className="sv-summary">{service.summary}</span>
-          </div>
-        </div>
-        <span className="sv-icon" aria-hidden="true">
-          {isOpen ? "−" : "+"}
-        </span>
-      </button>
-
-      <div className="sv-panel" style={{ height: `${height}px` }} aria-hidden={!isOpen}>
-        <div ref={contentRef} className="sv-panel-inner">
-          <p className="sv-desc">{service.description}</p>
-          <ul className="sv-benefits">
-            {service.benefits.map((b, i) => (
-              <li key={i} className="sv-benefit">
-                <span className="sv-dot" />
-                {b}
-              </li>
-            ))}
-          </ul>
-          <a href="#contato" className="sv-cta">
-            Solicitar apresentação →
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function ServicesAccordion() {
+function ServicesSection() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
@@ -298,7 +188,7 @@ export default function ServicesAccordion() {
           margin-top: 8px;
         }
 
-        .sv-cta:hover { 
+        .sv-cta:hover {
           background: #f5f0e8;
           color: #0f2419;
           transform: translateY(-2px);
@@ -321,22 +211,11 @@ export default function ServicesAccordion() {
       <section className="sv-section" id="servicos">
         <div className="sv-layout">
 
-          {/* ESQUERDA */}
-          <div className="sv-left">
-            <span className="sv-eyebrow">O que oferecemos</span>
-            <h2 className="sv-heading">
-              Nossas <span>Soluções</span>
-            </h2>
-            <p className="sv-subtitle">
-              Combinamos tecnologia e cuidado humano para promover saúde mental,
-              conformidade legal e alta performance dentro da sua empresa.
-            </p>
-          </div>
+          <ServicesTitle />
 
-          {/* DIREITA */}
           <div className="sv-right">
             {servicesData.map((service, i) => (
-              <AccordionItem
+              <ServicesItem
                 key={service.number}
                 service={service}
                 isOpen={openIndex === i}
@@ -350,3 +229,5 @@ export default function ServicesAccordion() {
     </>
   );
 }
+
+export default ServicesSection;
