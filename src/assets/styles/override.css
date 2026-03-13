@@ -3,3 +3,11 @@
 *::after {
     font-family: 'Inter', sans-serif !important;
 }
+
+html {
+    scroll-behavior: smooth !important;
+}
+
+section[id], div[id] {
+    scroll-margin-top: 110px !important;
+}

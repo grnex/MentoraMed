@@ -10,7 +10,6 @@ function ServicesSection() {
     <>
       <style>{`
         .sv-section {
-          background: #0f2419;
           padding: 80px 40px;
         }
 
@@ -41,7 +40,7 @@ function ServicesSection() {
         .sv-heading {
           font-size: 50px;
           font-weight: 700;
-          color: #f5f0e8;
+          color: #0d1f1a;
           line-height: 1.15;
           margin: 0 0 20px;
         }
@@ -50,7 +49,7 @@ function ServicesSection() {
 
         .sv-subtitle {
           font-size: 0.95rem;
-          color: rgba(245,240,232,0.5);
+          color: rgba(13,31,26,0.5);
           line-height: 1.7;
           font-weight: 300;
           margin: 0;
@@ -62,11 +61,11 @@ function ServicesSection() {
         }
 
         .sv-item {
-          border-bottom: 1px solid rgba(245,240,232,0.1);
+          border-bottom: 1px solid rgba(0,0,0,0.10);
         }
 
         .sv-item:first-child {
-          border-top: 1px solid rgba(245,240,232,0.1);
+          border-top: 1px solid rgba(0,0,0,0.10);
         }
 
         .sv-trigger {
@@ -90,7 +89,7 @@ function ServicesSection() {
 
         .sv-num {
           font-size: 0.85rem;
-          color: rgba(245,240,232,0.2);
+          color: rgba(0,0,0,0.20);
           min-width: 22px;
           padding-top: 2px;
           flex-shrink: 0;
@@ -103,7 +102,7 @@ function ServicesSection() {
           display: block;
           font-size: 22px;
           font-weight: 600;
-          color: #f5f0e8;
+          color: #0d1f1a;
           line-height: 1.3;
           transition: color 0.2s;
         }
@@ -114,14 +113,14 @@ function ServicesSection() {
         .sv-summary {
           display: block;
           font-size: 0.8rem;
-          color: rgba(245,240,232,0.35);
+          color: rgba(13,31,26,0.35);
           font-weight: 300;
           margin-top: 3px;
         }
 
         .sv-icon {
           font-size: 1.4rem;
-          color: rgba(245,240,232,0.4);
+          color: rgba(0,0,0,0.4);
           flex-shrink: 0;
           line-height: 1;
           transition: color 0.2s;
@@ -141,7 +140,7 @@ function ServicesSection() {
 
         .sv-desc {
           font-size: 0.9rem;
-          color: rgba(245,240,232,0.6);
+          color: rgba(13,31,26,0.6);
           line-height: 1.75;
           font-weight: 300;
           margin-bottom: 16px;
@@ -161,7 +160,7 @@ function ServicesSection() {
           align-items: center;
           gap: 8px;
           font-size: 0.82rem;
-          color: rgba(245,240,232,0.7);
+          color: rgba(13,31,26,0.7);
           line-height: 1.4;
         }
 
@@ -178,7 +177,7 @@ function ServicesSection() {
           align-items: center;
           gap: 8px;
           background: #4a9e7a;
-          color: #0f2419;
+          color: #f5f0e8;
           padding: 10px 24px;
           border-radius: 50px;
           font-size: 0.85rem;
@@ -189,8 +188,8 @@ function ServicesSection() {
         }
 
         .sv-cta:hover {
-          background: #f5f0e8;
-          color: #0f2419;
+          background: #0d1f1a;
+          color: #f5f0e8;
           transform: translateY(-2px);
         }
 

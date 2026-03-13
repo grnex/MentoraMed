@@ -16,32 +16,36 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #C9A84C;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
+    color: #4a9e7a;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    font-family: 'Inter', sans-serif;
 }
 
 .blog-header-label svg {
-    color: #C9A84C;
+    color: #4a9e7a;
 }
 
 .blog-landing-title {
     color: #ffffff;
-    font-size: 44px;
+    font-size: 50px;
     font-weight: 700;
     line-height: 1.15;
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: 'Inter', sans-serif;
     margin-bottom: 16px;
+    letter-spacing: normal;
 }
 
 .blog-landing-subtitle {
     color: #a0b8a8;
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-weight: 300;
     margin-top: 0;
+    font-family: 'Inter', sans-serif;
 }
 
 /* Category Filters */

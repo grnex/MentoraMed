@@ -17,15 +17,17 @@ const NavMenu = ({ closeMobileMenu }) => {
           </a>
         </li>
 
-        <li aria-haspopup="true" className="h-link">
-          <a href="/#como-funciona" className="h-scroll-link" onClick={closeMobileMenu}>
-            Como Funciona
-          </a>
-        </li>
 
         <li aria-haspopup="true" className="h-link">
           <a href="/#servicos" className="h-scroll-link" onClick={closeMobileMenu}>
             Serviços
+          </a>
+        </li>
+
+
+        <li aria-haspopup="true" className="h-link">
+          <a href="/#como-funciona" className="h-scroll-link" onClick={closeMobileMenu}>
+            Como Funciona
           </a>
         </li>
 

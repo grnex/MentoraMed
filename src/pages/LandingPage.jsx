@@ -19,8 +19,8 @@ function LandingPage() {
       <AboutSection />
       <NR1Section />
       <ResponsabilidadeSection />
-      <FAQSection />
       <ServicesSection />
+      <FAQSection />
       <BenefitsSection />
       <FAQNR1Section />
       <BlogLandingSection />
